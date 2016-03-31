@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name":"Smilence",
-    "version":"1.0.0",
+    "version":"1.2.5",
     "permissions":["<all_urls>"],
     "browser_action":{
     "defult_icon":"icon.png",
@@ -12,9 +12,9 @@
     
     "icons": 
     { 
-    "16": "icon16.png",             
-    "48": "icon48.png",            
-    "128": "icon128.png" 
+    "16": "icon/icon16.png",             
+    "48": "icon/icon48.png",            
+    "128": "icon/icon128.png" 
     },  
 
     "content_scripts": [
