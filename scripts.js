@@ -14,7 +14,7 @@ while (myFlow.getElementsByTagName("li").length != 1)
 myFlow.getElementsByTagName("label")[0].innerHTML = myFlow.getElementsByTagName("label")[0].innerHTML.replace(/[0-9]{1,4}\ [A-Z]{2}（(([0-9]\.[0-9])|[0-9])\ [A-Z]{2}）/, flowTable.rows[1].cells[3].innerHTML);
 myFlow.getElementById("my1").checked = true;
 
-if (Number(document.getElementsByClassName("score")[0].innerHTML.match("[0-9].[0-9]{2}$")) > 2.5)
+if (Number(document.getElementsByClassName("score")[0].innerHTML.match("[0-9].[0-9]{2}$")) >= 2.5)
 	myFlow.getElementsByTagName("input")[0].value = 6;
 else
 	myFlow.getElementsByTagName("input")[0].value = 2;
