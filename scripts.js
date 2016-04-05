@@ -9,7 +9,7 @@ try
 	if (document.getElementsByClassName("score").length == 0)
 		score = 1.00; // 教师或新生
 	else
-		score = Number(document.getElementsByClassName("score")[0].innerText.match("[0-9].[0-9]{2}$"));
+		score = Number(document.getElementsByClassName("score")[0].innerText.trim().match("[0-9].[0-9]{2}$"));
 
 	var GetFlows = document.getElementById("GetFlows");
 	var group, size, value;
@@ -29,15 +29,14 @@ function parse(html)
 	var flowTable = GetFlows_temp.getElementsByClassName("flowTable")[0];
 	
 	// 资费组
-	group = flowTable.rows[1].cells[0].innerText;
-	if (group == "教师")
-		if (flowTable.rows[flowTable.rows.length - 1].cells[4].innerText == "已购买")
-			throw "教师账号不可重复购买"; // 否则后台数据会溢出
-	else if (group != "学生")
+	group = flowTable.rows[1].cells[0].innerText.trim();
+	if (group == "教师" && flowTable.rows[flowTable.rows.length - 1].cells[4].innerText.trim() == "已购买")
+		throw "教师账号不可重复购买"; // 否则后台数据会溢出
+	else if (group != "学生" && group != "教师")
 		throw "未知资费组" + group;
 
 	// 流量包大小
-	size = flowTable.rows[flowTable.rows.length - 1].cells[3].innerText;
+	size = flowTable.rows[flowTable.rows.length - 1].cells[3].innerText.trim();
 
 	// 流量包
 	if (group == "学生")
