@@ -1,5 +1,5 @@
 ﻿// JavaScript Document
-//@version 1.2.0
+//@version 1.2.1
 //@writer Ksar, Kzjnet
 
 try
@@ -41,23 +41,34 @@ try
 	world.id = "smilence_world";
 	GetFlows.appendChild(world);
 
-	var message = document.createElement("p");
+	var message = document.createElement("span");
 	message.id = "smilence_message";
-	message.innerText = group + " 你好，你可以花费 5.0 元，购买 1 个流量包，增加可用流量 " + size + " 。";
+	message.innerText = group + " ，你可以花费 5.0 元，购买 1 个流量包，增加可用流量 " + size + " 。";
 	world.appendChild(message);
+
+	world.appendChild(document.createElement("br"));
+	world.appendChild(document.createElement("br"));
 
 	var buy = document.createElement("button");
 	buy.id = "smilence_buy";
 	buy.innerText = "购买";
-	buy.onclick = function()
-	{
-		$.post("/flow/_GetFlows", {myFlow:"6"}, function(data){});
-	};
-	world.appendChild(buy);
-
-	
+	buy.onclick = smilence_buy_onclick;
+	world.appendChild(buy);	
 }
 catch(error)
 {
 	alert("Smilence 插件加载失败\n\n原因：" + error);
+}
+
+function smilence_buy_onclick()
+{
+	$.post
+	(
+		"/flow/_GetFlows",
+		{
+			"myFlow" : value,
+			"X-Requested-With" : "XMLHttpRequest"
+		},
+		function(data){}
+	);
 }
