@@ -2,7 +2,7 @@
     "manifest_version": 2,
     
     "name":"Smilence",
-    "version":"1.3.0",
+    "version":"1.4.0",
     
     "permissions": [
         "tabs",
@@ -11,8 +11,7 @@
     
     "browser_action": {
         "defult_icon":"icon.png",
-        "default_title": "Smilence",
-        "default_popup": "popup.html"
+        "default_title": "Smilence"
     },
     
     "icons": { 
