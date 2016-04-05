@@ -1,20 +1,63 @@
 ﻿// JavaScript Document
-//@version 1.1.0
+//@version 1.2.0
 //@writer Ksar, Kzjnet
 
-var flowTable = document.getElementsByClassName("flowTable")[0];
-while (flowTable.rows.length != 2)
-	flowTable.deleteRow(1);
-flowTable.rows[1].cells[1].innerHTML = "无限流量包";
-flowTable.rows[1].cells[4].innerHTML = "<span class=\"green\">可购买</span>";
+try
+{
+	var flowTable = document.getElementsByClassName("flowTable")[0];
 
-var myFlow = document.getElementsByClassName("myFlow")[0];
-while (myFlow.getElementsByTagName("li").length != 1)
-	myFlow.getElementsByTagName("li")[myFlow.getElementsByTagName("li").length - 1].remove();
-myFlow.getElementsByTagName("label")[0].innerHTML = myFlow.getElementsByTagName("label")[0].innerHTML.replace(/[0-9]{1,4}\ [A-Z]{2}（(([0-9]\.[0-9])|[0-9])\ [A-Z]{2}）/, flowTable.rows[1].cells[3].innerHTML);
-document.getElementById("my1").checked = true;
+	// 绩点
+	var score;
+	if (document.getElementsByClassName("score").length == 0)
+		score = 1.00; // 教师或新生
+	else
+		score = Number(document.getElementsByClassName("score")[0].innerText.match("[0-9].[0-9]{2}$"));
 
-if (Number(document.getElementsByClassName("score")[0].innerHTML.match("[0-9].[0-9]{2}$")) >= 2.5)
-	myFlow.getElementsByTagName("input")[0].value = 6;
-else
-	myFlow.getElementsByTagName("input")[0].value = 2;
+	// 资费组
+	var group = flowTable.rows[1].cells[0].innerText;
+	if (group == "教师")
+		if (flowTable.rows[flowTable.rows.length - 1].cells[4].innerText == "已购买")
+			throw "教师账号不可重复购买"; // 否则后台数据会溢出
+	else if (group != "学生")
+		throw "未知资费组" + group;
+
+	// 流量包大小
+	var size = flowTable.rows[flowTable.rows.length - 1].cells[3].innerText;
+
+	// 流量包
+	var value;
+	if (group == "学生")
+		if (score >= 2.50)
+			value = 6;
+		else
+			value = 2;
+	if (group == "教师")
+		value = 12;
+
+	var GetFlows = document.getElementById("GetFlows");
+	GetFlows.innerHTML = "";
+
+	var world = document.createElement("center");
+	world.id = "smilence_world";
+	GetFlows.appendChild(world);
+
+	var message = document.createElement("p");
+	message.id = "smilence_message";
+	message.innerText = group + " 你好，你可以花费 5.0 元，购买 1 个流量包，增加可用流量 " + size + " 。";
+	world.appendChild(message);
+
+	var buy = document.createElement("button");
+	buy.id = "smilence_buy";
+	buy.innerText = "购买";
+	buy.onclick = function()
+	{
+		$.post("/flow/_GetFlows", {myFlow:"6"}, function(data){});
+	};
+	world.appendChild(buy);
+
+	
+}
+catch(error)
+{
+	alert("Smilence 插件加载失败\n\n原因：" + error);
+}
