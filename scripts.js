@@ -93,7 +93,7 @@ function refresh()
 
 function smilence_buySuc()
 {
-	$.post("/flow/_GetFlows", "", function (data) {
+	$.post("/Flow/_BuyFlow", "", function (data) {
 		parse(data);
 		refresh();
 	});
