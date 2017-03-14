@@ -22,7 +22,7 @@
 
     "content_scripts": [
         {
-          "matches": ["http://self.dgut.edu.cn/Flow/Index"],
+          "matches": ["http://self.dgut.edu.cn/Flow"],
           "js": ["jquery.js", "scripts.js"]
         }
     ]
