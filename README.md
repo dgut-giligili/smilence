@@ -1,6 +1,6 @@
 # Smilence 闷声2.5
 
-![](https://img.shields.io/badge/Availability-Available-brightgreen.svg)
+![](https://img.shields.io/badge/availability-unavailable-red.svg)
 
 This Chrome extension allows you to purchase the 'unlimited traffic package' by only 5 RMB in [there](http://self.dgut.edu.cn) (smile).
 
